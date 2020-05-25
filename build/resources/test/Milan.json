@@ -1,0 +1,21 @@
+[
+  {
+    "firstName": "Rajnikanth",
+    "lastName": "Thalaiva",
+    "address": "TamilNadu",
+    "helpful": "000007",
+    "city": "Chennai",
+    "state": "TamilNadu",
+    "phoneNumber": "7845613258"
+  },
+  {
+    "firstName": "Kamal",
+    "lastName": "Hassan",
+    "address": "TamilNadu",
+    "helpful": "000008",
+    "city": "Chennai",
+    "state": "TamilNadu",
+    "phoneNumber": "784564648"
+  }
+]
+

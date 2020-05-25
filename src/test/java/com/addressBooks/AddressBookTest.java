@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 
 public class AddressBookTest {
 public static final String SOURCE_LOCATION="src/test/resources/";
@@ -16,7 +17,7 @@ public static final String SOURCE_LOCATION="src/test/resources/";
            File file=new File(SOURCE_LOCATION+"Rajnikanth"+".json");
            file.delete();
            Assert.assertTrue(shouldReturnTrue);
-       }catch(AddressBookException e){
+       }catch(FileManagerException e){
            e.printStackTrace();
        }
     }
@@ -27,33 +28,63 @@ public static final String SOURCE_LOCATION="src/test/resources/";
             FileManager fileManager = new FileManager();
             fileManager.createAddressBook("Milan");
             boolean shouldReturnTrue=fileManager.checkFileExistsOrNot("Milan");
-        }catch(AddressBookException e){
-            Assert.assertEquals(AddressBookException.ExceptionType.ADDRESSBOOK_ALREADY_EXISTS,e.type);
+        }catch(FileManagerException e){
+            Assert.assertEquals(FileManagerException.ExceptionType.ADDRESSBOOK_ALREADY_EXISTS,e.type);
             e.printStackTrace();
         }
     }
 
     @Test
-    public void createAddressBook_whenGivenNullValue_shouldThrowException() {
+    public void givenNullValue_whenCreatingAddressBook_shouldThrowException() {
         try {
             FileManager fileManager = new FileManager();
             fileManager.createAddressBook(null);
-        }catch(AddressBookException e){
-            Assert.assertEquals(AddressBookException.ExceptionType.CANNOT_CREATE_ADDRESS_BOOK,e.type);
+        }catch(FileManagerException e){
+            Assert.assertEquals(FileManagerException.ExceptionType.CANNOT_CREATE_ADDRESS_BOOK,e.type);
             e.printStackTrace();
         }
     }
 
     @Test
-    public void createAddressBook_whenGivenEmptyValue_shouldThrowException() {
+    public void givenEmptyValue_whenCreatingAddressBook_shouldThrowException() {
         try {
             FileManager fileManager = new FileManager();
             fileManager.createAddressBook(null);
-        }catch(AddressBookException e){
-            Assert.assertEquals(AddressBookException.ExceptionType.CANNOT_CREATE_ADDRESS_BOOK,e.type);
+        }catch(FileManagerException e){
+            Assert.assertEquals(FileManagerException.ExceptionType.CANNOT_CREATE_ADDRESS_BOOK,e.type);
             e.printStackTrace();
         }
     }
 
+    @Test
+    public void givenContactInfo_whenSaved_shouldSaveTheEnteredDataInJsonFile() {
+    try {
+        FileManager fileManager = new FileManager();
+        fileManager.createAddressBook("KamalHassan");
+        fileManager.addPerson("Milan","Gowda","HSRLAYOUT","789456","Bangalore",
+                "Karnataka","7894561230");
+
+        fileManager.addPerson("Rahul","kumar","BTM","783356","Bangalore",
+                "Karnataka","7894561789");
+        fileManager.saveChangesInAddressBook();
+    } catch (FileManagerException e) {
+        e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenJsonFile_whenRead_shouldReturnTheData()  {
+       try {
+           FileManager fileManager = new FileManager();
+           fileManager.openAddressBook("Kamal");
+           fileManager.addPerson("Rakesh", "kumar",
+                   "HSRLayout", "12896", "Bangalore", "Karnataka", "4561327891");
+           fileManager.addPerson("Rahul", "kumar",
+                   "HSRLayout", "12896", "Mangaore", "Goa", "4561327");
+           fileManager.saveChangesInAddressBook();
+       }catch(FileManagerException e){
+            e.printStackTrace();
+       }
+    }
 }
 
