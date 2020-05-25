@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.IOException;
 
 public class AddressBookTest {
 public static final String SOURCE_LOCATION="src/test/resources/";
@@ -60,7 +59,7 @@ public static final String SOURCE_LOCATION="src/test/resources/";
     public void givenContactInfo_whenSaved_shouldSaveTheEnteredDataInJsonFile() {
     try {
         FileManager fileManager = new FileManager();
-        fileManager.createAddressBook("KamalHassan");
+        fileManager.createAddressBook("Kamal");
         fileManager.addPerson("Milan","Gowda","HSRLAYOUT","789456","Bangalore",
                 "Karnataka","7894561230");
 
@@ -73,7 +72,7 @@ public static final String SOURCE_LOCATION="src/test/resources/";
     }
 
     @Test
-    public void givenJsonFile_whenRead_shouldReturnTheData()  {
+    public void givenJsonFile_whenRead_shouldReturnTheDataPresentAndDataAdded()  {
        try {
            FileManager fileManager = new FileManager();
            fileManager.openAddressBook("Kamal");
@@ -86,5 +85,21 @@ public static final String SOURCE_LOCATION="src/test/resources/";
             e.printStackTrace();
        }
     }
+
+//    @Test
+//    public void givenJsonFile_whenReadAndSaved_shouldSaveInAnotherFileNameGiven()  {
+//        try {
+//            FileManager fileManager = new FileManager();
+//            fileManager.openAddressBook("Kamal");
+//            fileManager.addPerson("Rakesh", "kumar",
+//                    "HSRLayout", "12896", "Bangalore", "Karnataka", "4561327891");
+//            fileManager.addPerson("Rahul", "kumar",
+//                    "HSRLayout", "12896", "Mangaore", "Goa", "4561327");
+//            fileManager.saveAsChangesInAddressBook("HrithikRoshan");
+//        }catch(FileManagerException e){
+//            e.printStackTrace();
+//        }
+//    }
+
 }
 
