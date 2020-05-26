@@ -48,7 +48,7 @@ public static final String SOURCE_LOCATION="src/test/resources/";
     public void givenEmptyValue_whenCreatingAddressBook_shouldThrowException() {
         try {
             FileManager fileManager = new FileManager();
-            fileManager.createAddressBook(null);
+            fileManager.createAddressBook("");
         }catch(FileManagerException e){
             Assert.assertEquals(FileManagerException.ExceptionType.CANNOT_CREATE_ADDRESS_BOOK,e.type);
             e.printStackTrace();
@@ -59,13 +59,14 @@ public static final String SOURCE_LOCATION="src/test/resources/";
     public void givenContactInfo_whenSaved_shouldSaveTheEnteredDataInJsonFile() {
     try {
         FileManager fileManager = new FileManager();
-        fileManager.createAddressBook("Kamal");
+        fileManager.createAddressBook("RajniKamal");
         fileManager.addPerson("Milan","Gowda","HSRLAYOUT","789456","Bangalore",
                 "Karnataka","7894561230");
 
         fileManager.addPerson("Rahul","kumar","BTM","783356","Bangalore",
                 "Karnataka","7894561789");
         fileManager.saveChangesInAddressBook();
+        Assert.assertEquals(2,fileManager.getNoOfRecordsInTheAddressBook());
     } catch (FileManagerException e) {
         e.printStackTrace();
         }
@@ -75,31 +76,37 @@ public static final String SOURCE_LOCATION="src/test/resources/";
     public void givenJsonFile_whenRead_shouldReturnTheDataPresentAndDataAdded()  {
        try {
            FileManager fileManager = new FileManager();
-           fileManager.openAddressBook("Kamal");
+           fileManager.openAddressBook("RajniKamal");
            fileManager.addPerson("Rakesh", "kumar",
                    "HSRLayout", "12896", "Bangalore", "Karnataka", "4561327891");
            fileManager.addPerson("Rahul", "kumar",
                    "HSRLayout", "12896", "Mangaore", "Goa", "4561327");
            fileManager.saveChangesInAddressBook();
+           Assert.assertEquals(4,fileManager.getNoOfRecordsInTheAddressBook());
+           File file=new File(SOURCE_LOCATION+"RajniKamal"+".json");
+           file.delete();
        }catch(FileManagerException e){
             e.printStackTrace();
        }
     }
 
-//    @Test
-//    public void givenJsonFile_whenReadAndSaved_shouldSaveInAnotherFileNameGiven()  {
-//        try {
-//            FileManager fileManager = new FileManager();
-//            fileManager.openAddressBook("Kamal");
-//            fileManager.addPerson("Rakesh", "kumar",
-//                    "HSRLayout", "12896", "Bangalore", "Karnataka", "4561327891");
-//            fileManager.addPerson("Rahul", "kumar",
-//                    "HSRLayout", "12896", "Mangaore", "Goa", "4561327");
-//            fileManager.saveAsChangesInAddressBook("HrithikRoshan");
-//        }catch(FileManagerException e){
-//            e.printStackTrace();
-//        }
-//    }
+    @Test
+    public void givenJsonFile_whenReadAndSaved_shouldSaveInAnotherFileNameGiven()  {
+        try {
+            FileManager fileManager = new FileManager();
+            fileManager.openAddressBook("KamallHassan");
+            fileManager.addPerson("Rakesh", "kumar",
+                    "HSRLayout", "12896", "Bangalore", "Karnataka", "4561327891");
+            fileManager.addPerson("Rahul", "kumar",
+                    "HSRLayout", "12896", "Mangaore", "Goa", "4561327");
+            fileManager.saveAsChangesInAddressBook("HrithikRoshan");
+            Assert.assertEquals(4,fileManager.getNoOfRecordsInTheAddressBook());
+            File file=new File(SOURCE_LOCATION+"HrithikRoshan"+".json");
+            file.delete();
+        }catch(FileManagerException e){
+            e.printStackTrace();
+        }
+    }
 
 }
 

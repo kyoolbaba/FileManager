@@ -33,4 +33,7 @@ public class FileManager extends AddressBook{
        return iFileManagerController.checkFileExistsOrNot(addressBookName);
     }
 
+    public void saveAsChangesInAddressBook(String newAddressBookName) throws FileManagerException {
+        iFileManagerController.saveChangesAs(newAddressBookName);
+    }
 }

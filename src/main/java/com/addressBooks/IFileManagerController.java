@@ -10,4 +10,5 @@ public interface IFileManagerController {
 
     public void openAddressBook(String addressBookName) throws FileManagerException;
 
+    public void saveChangesAs(String newAddressBookName) throws FileManagerException;
 }
