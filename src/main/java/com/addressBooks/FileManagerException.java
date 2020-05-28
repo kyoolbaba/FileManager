@@ -3,7 +3,8 @@ package com.addressBooks;
 public class FileManagerException extends Exception{
 
     enum ExceptionType{
-        CANNOT_CREATE_ADDRESS_BOOK,ADDRESSBOOK_ALREADY_EXISTS,FILE_PROBLEM,ADDRESSBOOK_DOES_NOT_EXIST
+        CANNOT_CREATE_ADDRESS_BOOK,ADDRESSBOOK_ALREADY_EXISTS,FILE_PROBLEM,
+        ADDRESSBOOK_DOES_NOT_EXIST,INVALID_EXTENSION;
     }
     ExceptionType type;
     public FileManagerException(String message, ExceptionType type) {

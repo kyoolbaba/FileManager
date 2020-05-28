@@ -7,16 +7,16 @@ import com.addressbook.SearchUpdateAndDeleteBy;
 
 import java.util.List;
 
-public class AddressBook {
+public class AddressBookController {
 
 
     IAddressBookBuilder iAddressBookBuilder;
 
-    public AddressBook() {
+    public AddressBookController() {
         iAddressBookBuilder =AddressBookBuilderFactory.createAddressBookControlller();
     }
 
-    public AddressBook(List<Person> list) {
+    public AddressBookController(List<Person> list) {
         iAddressBookBuilder =AddressBookBuilderFactory.accessAddressBookControlller(list);
     }
 
@@ -30,11 +30,11 @@ public class AddressBook {
     }
 
     public int getNoOfRecordsInTheAddressBook(){
-        return iAddressBookBuilder.getNoOfRecordsInTheAddressBook().size();
+        return iAddressBookBuilder.getContactList().size();
     }
 
     public List<Person> getListOfContacts(){
-        return iAddressBookBuilder.getNoOfRecordsInTheAddressBook();
+        return iAddressBookBuilder.getContactList();
     }
 
     public void deleteContact(String firstName){
